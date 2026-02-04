@@ -1,0 +1,21 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# SQLite
+*.sqlite
+*.sqlite3
+*.db
+
+# Next.js
+.next/
+out/
+
+# OS junk
+.DS_Store
