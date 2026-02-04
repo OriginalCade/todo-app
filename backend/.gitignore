@@ -19,3 +19,8 @@ out/
 
 # OS junk
 .DS_Store
+
+# DB
+./db/*.sqlite
+./db/*.db
+
