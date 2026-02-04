@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -26,7 +26,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5001/api/auth/login", {
+      const res = await fetch("http://localhost:5001/api/auth/signup", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -36,10 +36,15 @@ export default function Login() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Login failed");
+        // backend may return { errors: [...] } or { error: "..." }
+        if (data.errors?.length) {
+          throw new Error(data.errors[0].message);
+        }
+        throw new Error(data.error || "Signup failed");
       }
 
-      window.location.href = "/todos";
+      // After successful signup, send them to login
+      window.location.href = "/";
     } catch (err) {
       setError(err.message);
     } finally {
@@ -51,14 +56,14 @@ export default function Login() {
     <div className="flex justify-center mt-10">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Create an account</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your email and password to sign up
           </CardDescription>
 
-          <Link href="/signup">
+          <Link href="/">
             <Button variant="link" className="px-0">
-              Sign up
+              Already have an account? Login
             </Button>
           </Link>
         </CardHeader>
@@ -94,7 +99,7 @@ export default function Login() {
             )}
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
+              {loading ? "Creating account..." : "Signup"}
             </Button>
           </form>
         </CardContent>

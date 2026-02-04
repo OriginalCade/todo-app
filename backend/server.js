@@ -8,7 +8,7 @@ const todoRoutes = require("./routes/todos");
 const requireAuth = require("./middleware/requireAuth");
 
 const app = express();
-const PORT = 3000;
+const PORT = 5001;
 
 // eslint-disable-next-line no-undef
 if (!process.env.JWT_SECRET) {
@@ -72,7 +72,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/todos", requireAuth, todoRoutes);
 
 // error handler
-app.use((err, req, res) => {
+// eslint-disable-next-line
+app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: "Internal server error" });
 });
