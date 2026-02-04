@@ -1,3 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
@@ -8,7 +11,7 @@ const todoRoutes = require("./routes/todos");
 const requireAuth = require("./middleware/requireAuth");
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 // eslint-disable-next-line no-undef
 if (!process.env.JWT_SECRET) {

@@ -1,0 +1,22 @@
+{
+  "name": "test-app",
+  "version": "1.0.0",
+  "description": "## How to run Backend",
+  "main": "index.js",
+  "scripts": {
+    "start:backend": "cd backend && npm install && node server.js",
+    "start:frontend": "cd frontend && npm install && npm run dev",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OriginalCade/todo-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OriginalCade/todo-app/issues"
+  },
+  "homepage": "https://github.com/OriginalCade/todo-app#readme"
+}

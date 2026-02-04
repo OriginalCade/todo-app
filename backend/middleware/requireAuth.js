@@ -5,8 +5,12 @@ function requireAuth(req, res, next) {
   if (!token) return res.sendStatus(401);
 
   try {
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET must be defined in .env");
+    }
     // eslint-disable-next-line no-undef
-    const secret = process.env.JWT_SECRET || "dev_secret"; // <-- fallback
+    const secret = process.env.JWT_SECRET;
+
     const payload = jwt.verify(token, secret);
     req.user = { id: payload.userId };
     next();
